@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 //로또의 최고 순위와 최저 순위
+//복습완료
 public class Main {
     public int[] solution(int[] lottos, int[] win_nums) {
         Map<Integer, Boolean> map = new HashMap<>();

@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 //카카오 기출 신고결과 받기
+//복습완료
 public class Singo {
     public int[] solution(String[] id_list, String[] report, int k) {
         int[] answer = new int[id_list.length];
