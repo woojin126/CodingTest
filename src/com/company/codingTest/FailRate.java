@@ -32,9 +32,8 @@ public class FailRate {
                 rate.put(i, 0.0);
             }
         }
-        System.out.println(map);
-        System.out.println(rate);
         List<Integer> list = sortByValue(rate);
+        System.out.println(list);
         int[] answer = new int[list.size()];
         for (int i = 0; i < list.size(); i++) {
             answer[i] = list.get(i);
