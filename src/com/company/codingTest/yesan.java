@@ -9,6 +9,7 @@ public class yesan {
 
 
         Arrays.sort(d);
+
         int count = 0;
         for (int i = 0 ; i < d.length ; i++) {
             budget -= d[i];
