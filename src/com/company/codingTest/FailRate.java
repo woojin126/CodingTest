@@ -7,11 +7,13 @@ public class FailRate {
     public static List<Integer> sortByValue(final Map<Integer,Double> map) {
         List<Integer> list = new ArrayList();
         list.addAll(map.keySet());
-        Collections.sort(list, (Comparator) (o1, o2) -> {
-            Object v1 = map.get(o1);
-            Object v2 = map.get(o2);
-            System.out.println(((Comparable)v2).compareTo(v1));
-            return ((Comparable) v2).compareTo(v1);
+        Collections.sort(list, new Comparator<Integer>(){
+            @Override
+            public int compare(Integer o1, Integer o2) {
+                Object v1 = map.get(o1);
+                Object v2 = map.get(o2);
+                return ((Comparable)v2).compareTo(v1);
+            }
         });
         return list;
     }
