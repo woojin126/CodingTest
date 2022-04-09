@@ -1,7 +1,5 @@
 # CodingTest
 
-- 코딩 테스트
-  - level1 
-    - 신고 결과 받기 (카카오 블라인드 테스트)
-    - 로또의 최고 순위와 최저 순위 (Dev-Matching)
-    - 키패드 문제 (카카오 블라인드 테스트)
+## 코딩테스트 정리 블로그
+
+https://woojin126.tistory.com/category/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8
