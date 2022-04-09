@@ -1,7 +1,6 @@
 package com.company.codingTest;
 
 import java.util.Arrays;
-
 public class Dart {
     public int solution(String dartResult) {
         int[] arr = new int[3];
