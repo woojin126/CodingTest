@@ -3,6 +3,7 @@ package com.company.codingTest;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+/*
 
 //로또의 최고 순위와 최저 순위
 //복습완료
@@ -31,10 +32,11 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Main main = new Main();
+        back main = new back();
         int[] lottos = {31, 45, 0, 0, 0, 0};
         int[] win_nums = {31, 10, 45, 1, 6, 19};
         int[] solution = main.solution(lottos, win_nums);
         System.out.println(Arrays.toString(solution));
     }
 }
+*/
