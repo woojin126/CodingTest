@@ -1,42 +1,55 @@
 package com.company.codingTest;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-/*
 
-//로또의 최고 순위와 최저 순위
-//복습완료
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Stack;
+
+
 public class Main {
-    public int[] solution(int[] lottos, int[] win_nums) {
-        Map<Integer, Boolean> map = new HashMap<>();
-        int zeroCount = 0;
-        for(int lotto : lottos) {
-            if (lotto == 0) {
-                zeroCount++;
-                continue;
+    public static void main(String[] args) throws IOException {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringBuilder sb = new StringBuilder();
+        String  N = br.readLine();
+        Stack<Character> stack = new Stack<>();
+        int result = 0;
+        int value = 1;
+
+        for(int i = 0; i < N.length(); i++) {
+            if(N.charAt(i) == '(') {
+                stack.push(N.charAt(i));
+                value *= 2; //( : 2
+            } else if(N.charAt(i) == '[') {
+                stack.push(N.charAt(i));
+                value *= 3; //[ : 3
+            } else if(N.charAt(i) == ')') {
+                if(stack.isEmpty() || stack.peek() != '(') {
+                    result = 0;
+                    break;
+                } else if(N.charAt(i-1) == '(') {
+                    result += value;
+                }
+                stack.pop();
+                value /= 2;
+            } else if(N.charAt(i) == ']') {
+                if (stack.isEmpty() || stack.peek() != '[') {
+                    result = 0;
+                    break;
+                } else if (N.charAt(i - 1) == '[') {
+                    result += value;
+                }
+                stack.pop();
+                value /= 3;
             }
-            map.put(lotto, true);
+        }
+        if(!stack.isEmpty()) sb.append(0).append("\n");
+        else sb.append(result).append("\n");
+        System.out.println(sb);
         }
 
-        //same;
-        long count = Arrays.stream(win_nums).filter(win -> map.containsKey(win)).count();
-        int sameCount = (int) count;
-        int maxRank = 7 - (sameCount + zeroCount);
-        int minRank = 7 - sameCount;
-        if (maxRank > 6 ) maxRank = 6;
-        if (minRank > 6) minRank = 6;
-
-
-        return new int[]{maxRank,minRank};
     }
 
-    public static void main(String[] args) {
-        back main = new back();
-        int[] lottos = {31, 45, 0, 0, 0, 0};
-        int[] win_nums = {31, 10, 45, 1, 6, 19};
-        int[] solution = main.solution(lottos, win_nums);
-        System.out.println(Arrays.toString(solution));
-    }
-}
-*/
+
+

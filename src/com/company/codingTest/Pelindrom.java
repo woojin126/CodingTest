@@ -3,28 +3,30 @@ package com.company.codingTest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.Stack;
 
 public class Pelindrom {
 
-    public static void main(String[] args) throws IOException {
-
-        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
-
-        while(true) {
-            String N = bf.readLine();
-            boolean check = true;
-
-            if (N.equals("0")) break;
-
-            for (int i = 0; i < N.length() / 2; i++) {
-                if (N.charAt(i) == N.charAt(N.length() -1 - i)) check = true;
-                else check = false;
+    public static String calculate(String N) throws IOException {
+            Stack<Character> stack = new Stack<>();
+            for (int i = 0; i < N.length(); i++) {
+                if (N.charAt(i) == '(') stack.push(N.charAt(i));
+                else if (stack.empty()) return "NO";
+                else stack.pop();
             }
 
-            if (check) System.out.println("yes");
-            else System.out.println("no");
+            if (stack.empty()) return "YES";
+            else return "NO";
 
+        }
 
+    public static void main(String[] args) throws IOException {
+        BufferedReader bf = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(bf.readLine());
+        for (int i = 0 ; i < T; i++) {
+            String results = calculate(bf.readLine());
+
+            System.out.println(results);
         }
     }
 
