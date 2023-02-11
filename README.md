@@ -5,7 +5,7 @@
 https://woojin126.tistory.com/category/%EC%BD%94%EB%94%A9%ED%85%8C%EC%8A%A4%ED%8A%B8
 
 
-1. FindLetter 문자 찾기문제
+1.문자 찾기문제 (FindLetter)
 
 설명
 
@@ -30,7 +30,7 @@ c
 풀이: 입력받는 문자와 단어를 모두 lowercase 로 해준다음 일치하는 문자 개수를 카운팅
 
 
-2. 대소문자 변환
+2. 대소문자 변환 (CaseConversion)
    설명
 
 대문자와 소문자가 같이 존재하는 문자열을 입력받아 대문자는 소문자로 소문자는 대문자로 변환하여 출력하는 프로그램을 작성하세요.
@@ -54,3 +54,11 @@ StuDY
 sTUdy
 
 TIP) 아스킾코드 대문자는 65~90 , 소문자는 97~122 를사용하는 방법
+
+        for (char x : str.toCharArray()) {
+            if (x >= 65 && x <= 90) {
+                answer.append((char)(x + 32));
+            } else {
+                answer.append((char)(x - 32));
+            }
+        }
