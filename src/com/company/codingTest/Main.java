@@ -1,55 +1,32 @@
 package com.company.codingTest;
 
-
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Stack;
-
+import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws IOException {
-
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringBuilder sb = new StringBuilder();
-        String  N = br.readLine();
-        Stack<Character> stack = new Stack<>();
-        int result = 0;
-        int value = 1;
-
-        for(int i = 0; i < N.length(); i++) {
-            if(N.charAt(i) == '(') {
-                stack.push(N.charAt(i));
-                value *= 2; //( : 2
-            } else if(N.charAt(i) == '[') {
-                stack.push(N.charAt(i));
-                value *= 3; //[ : 3
-            } else if(N.charAt(i) == ')') {
-                if(stack.isEmpty() || stack.peek() != '(') {
-                    result = 0;
-                    break;
-                } else if(N.charAt(i-1) == '(') {
-                    result += value;
-                }
-                stack.pop();
-                value /= 2;
-            } else if(N.charAt(i) == ']') {
-                if (stack.isEmpty() || stack.peek() != '[') {
-                    result = 0;
-                    break;
-                } else if (N.charAt(i - 1) == '[') {
-                    result += value;
-                }
-                stack.pop();
-                value /= 3;
+    public static String reverseString(String name) {
+        String answer = "";
+        int firstIndex = 0;
+        int lastIndex = name.length()-1;
+        char[] s = name.toCharArray();
+        while (firstIndex < lastIndex) {
+            if (!((s[firstIndex] >= 'A' && s[firstIndex] <= 'Z') || (s[firstIndex] >= 'a' && s[firstIndex] <= 'z'))) firstIndex++;
+            else if (!((s[lastIndex] >= 'A' && s[lastIndex] <= 'Z') || (s[lastIndex] >= 'a' && s[lastIndex] <= 'z'))) lastIndex--;
+            else {
+                char tmp = s[firstIndex];
+                s[firstIndex] = s[lastIndex];
+                s[lastIndex] = tmp;
+                firstIndex++;
+                lastIndex--;
             }
-        }
-        if(!stack.isEmpty()) sb.append(0).append("\n");
-        else sb.append(result).append("\n");
-        System.out.println(sb);
-        }
 
+            answer =  String.valueOf(s);
+        }
+        return answer;
     }
-
-
-
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        String text = sc.next();
+        System.out.println(reverseString(text));
+    }
+}
