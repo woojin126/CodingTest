@@ -318,3 +318,81 @@ public class Main {
 
 
 ```
+
+## 7. 회문 문자열
+   설명
+
+앞에서 읽을 때나 뒤에서 읽을 때나 같은 문자열을 회문 문자열이라고 합니다.
+
+문자열이 입력되면 해당 문자열이 회문 문자열이면 "YES", 회문 문자열이 아니면 “NO"를 출력하는 프로그램을 작성하세요.
+
+단 회문을 검사할 때 대소문자를 구분하지 않습니다.
+
+
+입력
+첫 줄에 길이 100을 넘지 않는 공백이 없는 문자열이 주어집니다.
+
+
+출력
+첫 번째 줄에 회문 문자열인지의 결과를 YES 또는 NO로 출력합니다.
+
+
+예시 입력 1
+
+gooG
+예시 출력 1
+
+YES
+
+``` 첫풀이
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Main {
+    public static boolean solution(String s) {
+        boolean status = false;
+        String aCase = s.toLowerCase();
+        int max = aCase.length() - 1;
+        for (int i = 0 ; i < aCase.length()/2 ;i++) {
+            if (aCase.charAt(i) == aCase.charAt(max)) {
+                status = true;
+                max--;
+            }
+            else {
+                status = false;
+                break;
+            }
+        }
+        return status;
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        String text = sc.next();
+        if (solution(text)) System.out.println("YES");
+        else System.out.println("NO");
+    }
+}
+
+
+```
+
+``` 두번째 풀이 
+
+public class Main {
+    public static String solution(String s) {
+        StringBuilder stringBuilder = new StringBuilder(s);
+        String reverseString = stringBuilder.reverse().toString();
+        if (s.equalsIgnoreCase(reverseString)) return "YES";
+        else return "NO";
+    }
+
+    public static void main(String[] args) throws IOException {
+        Scanner sc = new Scanner(System.in);
+        String text = sc.next();
+        String result = solution(text);
+        System.out.println(result);
+    }
+}
+
+```
