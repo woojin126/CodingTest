@@ -396,3 +396,225 @@ public class Main {
 }
 
 ```
+## 8. 유효한 팰린드롬
+   설명
+
+앞에서 읽을 때나 뒤에서 읽을 때나 같은 문자열을 팰린드롬이라고 합니다.
+
+문자열이 입력되면 해당 문자열이 팰린드롬이면 "YES", 아니면 “NO"를 출력하는 프로그램을 작성하세요.
+
+단 회문을 검사할 때 알파벳만 가지고 회문을 검사하며, 대소문자를 구분하지 않습니다.
+
+알파벳 이외의 문자들의 무시합니다.
+
+
+입력
+첫 줄에 길이 100을 넘지 않는 공백이 없는 문자열이 주어집니다.
+
+
+출력
+첫 번째 줄에 팰린드롬인지의 결과를 YES 또는 NO로 출력합니다.
+
+
+예시 입력 1
+
+found7, time: study; Yduts; emit, 7Dnuof
+예시 출력 1
+
+YES
+
+``` 첫번째 풀이
+import java.util.*;
+class Main {
+    public String solution(String str){
+        String result = "";
+        String lowerStr = str.toLowerCase();
+        for(char s : lowerStr.toCharArray()) {
+            if ((s >= 'a' && s <= 'z') || (s >= 'A' && s <= 'Z')) {
+                result += s;
+            }
+        }
+        String answer = result.trim();
+        String reverseAnswer = new StringBuilder(answer).reverse().toString();
+
+        if (answer.equals(reverseAnswer)) return "YES";
+        else return "NO";
+    }
+
+    public static void main(String[] args){
+        Main T = new Main();
+        Scanner kb = new Scanner(System.in);
+        String str=kb.nextLine();
+        System.out.print(T.solution(str));
+    }
+} 
+```
+
+``` 두번째 방법
+
+class Main {
+    public String solution(String s){
+        String answer="NO";
+        s=s.toUpperCase().replaceAll("[^A-Z]", "");
+        String tmp=new StringBuilder(s).reverse().toString();
+        if(s.equals(tmp)) answer="YES";
+        return answer;
+    }
+
+    public static void main(String[] args){
+        Main T = new Main();
+        Scanner kb = new Scanner(System.in);
+        String str=kb.nextLine();
+        System.out.print(T.solution(str));
+    }
+} 
+
+```
+
+
+``` 첫번째 풀이
+
+class Main {
+    public int solution(String str){
+        String upperCase = str.toUpperCase();
+
+        String result = upperCase.replaceAll("[A-Z]", "");
+
+        int answer = Integer.parseInt(result);
+
+        return answer;
+
+    }
+
+    public static void main(String[] args){
+        Main T = new Main();
+        Scanner kb = new Scanner(System.in);
+        String str=kb.nextLine();
+        System.out.print(T.solution(str));
+    }
+}
+
+``` 
+``` 두번쨰 풀이
+아스킾 넘버를 이용
+
+import java.util.*;
+class Main {
+    public int solution(String str){
+        int answer = 0;
+        for (char c : str.toCharArray()) {
+            if (c >= 48 && c <= 57) answer = answer*10+(c-48);
+        }
+
+        return answer;
+    }
+
+    public static void main(String[] args){
+        Main T = new Main();
+        Scanner kb = new Scanner(System.in);
+        String str=kb.nextLine();
+        System.out.print(T.solution(str));
+    }
+}
+
+
+```
+
+``` 세번째 풀이는 Character.isDigit 메서드를 이용하여 숫자인지 문자인지 판별
+
+import java.util.*;
+class Main {
+    public int solution(String str){
+        String answer = "";
+        for (char c : str.toCharArray()) {
+            if (Character.isDigit(c)) answer+=c;
+        }
+
+        return Integer.parseInt(answer);
+    }
+
+    public static void main(String[] args){
+        Main T = new Main();
+        Scanner kb = new Scanner(System.in);
+        String str=kb.nextLine();
+        System.out.print(T.solution(str));
+    }
+}
+
+```
+10. ## 가장 짧은 문자거리
+설명
+
+한 개의 문자열 s와 문자 t가 주어지면 문자열 s의 각 문자가 문자 t와 떨어진 최소거리를 출력하는 프로그램을 작성하세요.
+
+
+입력
+첫 번째 줄에 문자열 s와 문자 t가 주어진다. 문자열과 문자는 소문자로만 주어집니다.
+
+문자열의 길이는 100을 넘지 않는다.
+
+
+출력
+첫 번째 줄에 각 문자열 s의 각 문자가 문자 t와 떨어진 거리를 순서대로 출력한다.
+
+
+예시 입력 1
+
+teachermode e
+예시 출력 1
+
+1 0 1 2 1 0 1 2 2 1 0
+
+``` 
+import java.util.*;
+class Main {
+    public int[] solution(String s, char t){
+        int[] arr = new int[s.length()];
+
+        int defaultValue = 150;
+        for (int i = 0 ; i < s.length() ; i++) {
+            if (s.charAt(i) == t) {
+                defaultValue = 0;
+                arr[i] = defaultValue;
+            } else {
+                defaultValue++;
+                arr[i] = defaultValue;
+            }
+        }
+
+        defaultValue = 150;
+        for (int i = s.length() - 1; i >= 0; i--) {
+            if (s.charAt(i) == t) defaultValue = 0;
+            else {
+                defaultValue++;
+                arr[i] = Math.min(arr[i], defaultValue);
+            }
+        }
+        return arr;
+    }
+
+    public static void main(String[] args){
+        Main T = new Main();
+        Scanner kb = new Scanner(System.in);
+        String[] s = kb.nextLine().split(" ");
+       for (int x : T.solution(s[0], s[1].charAt(0))) {
+           System.out.print(x+" ");
+       }
+    }
+}
+
+1. 왼 -> 오른쪽 스캔 왼쪽 e를 기준으로 스캔
+2. 오  -> 왼쪽 스캔 오른쪽 e 를 기준으로 스캔.
+3. 1,2 에서 나타낸 거리를 비교해 숫자가 낮은것이 가장 최단거리.
+
+p를 = 1000으로 셋팅하는이유는
+teachermode e 예제에서 
+1-1. 왼쪽 e를기준으로 ach 의 거리를계산.
+2-2. 오른쪽 e를 기준으로 ach를 계산하여 비교를하는데 있어서
+
+핵심 > 
+맨앞 t 는 1.1 예시에 대입을해본다면 왼쪽 e를 기준으로 계산할 거리가 없기떄문에 큰값을 설정해두고 
+2-2를 계산후  1.1 과 2.2를 비교했을떄 2.2의 값이 출력되도록하기 위한 것이다.  
+
+
+```
