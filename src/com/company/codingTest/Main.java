@@ -1,37 +1,30 @@
 package com.company.codingTest;
 import java.util.*;
+
 class Main {
-    public int[] solution(String s, char t){
-        int[] arr = new int[s.length()];
-
-        int defaultValue = 1000;
-        for (int i = 0 ; i < s.length() ; i++) {
-            if (s.charAt(i) == t) {
-                defaultValue = 0;
-                arr[i] = defaultValue;
+    public static String solution(String s) {
+        StringBuilder answer = new StringBuilder();
+        int count = 1;
+        s = s + " ";
+        for (int i = 0; i < s.length() - 1; i++) {
+            if (s.charAt(i) == s.charAt(i + 1)) {
+                count++;
+            } else if (count == 1) {
+                answer.append(s.charAt(i));
             } else {
-                defaultValue++;
-                arr[i] = defaultValue;
+                answer.append(s.charAt(i));
+                answer.append(count);
+                count = 1;
             }
         }
 
-        defaultValue = 1000;
-        for (int i = s.length() - 1; i >= 0; i--) {
-            if (s.charAt(i) == t) defaultValue = 0;
-            else {
-                defaultValue++;
-                arr[i] = Math.min(arr[i], defaultValue);
-            }
-        }
-        return arr;
+        return answer.toString();
     }
-    public static void main(String[] args){
-        Main T = new Main();
+
+    public static void main(String[] args) {
         Scanner kb = new Scanner(System.in);
-        String[] s = kb.nextLine().split(" ");
-       for (int x : T.solution(s[0], s[1].charAt(0))) {
-           System.out.print(x+" ");
-       }
+        String s = kb.next();
+        System.out.println(solution(s));
     }
 }
 
