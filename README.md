@@ -931,6 +931,7 @@ B
 D
 
 ``` 
+간단한 가위바위보
 import java.util.*;
 class Main {
     public static String solution(int[] a, int[] b) {
