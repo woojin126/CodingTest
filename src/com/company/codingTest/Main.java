@@ -20,6 +20,7 @@ class Main {
         int[] A = new int[N];
         int[] B = new int[N];
 
+        //꼮 이렇게 초기값 셋팅을 해야하는지? 생각이 더필요
         for (int i = 0; i < N; i++) {
             A[i] = sc.nextInt();
         }
