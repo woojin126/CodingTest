@@ -3,29 +3,49 @@ package com.company.codingTest;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.StringTokenizer;
 
 class Main {
-    public static int solution(int N) {
-        int[] arr = new int[N+1];
+    public static int reverseOrder(int N) {
+        int t = N;
+        int nm;
+        StringBuilder answer = new StringBuilder();
+        while (t != 0) {
+            nm = t % 10;
+            t = t/10;
 
-        for (int i = 2 ; i <= N ; i++) {
-            arr[i] = i;
-        }
-        for (int i = 2 ; i <= N ; i++) {
-            if (arr[i] == 0) continue;
-
-            for (int j = i*2 ; j <= N ; j+=i) {
-                arr[j] = 0;
-            }
+            answer.append(nm);
         }
 
-        return (int) Arrays.stream(arr).filter(k -> k != 0).count();
+        return Integer.parseInt(String.valueOf(answer));
+
+    }
+
+    public static boolean isPrime(int p) {
+        if (p == 1) return false;
+        for (int i = 2; i<= (int)Math.sqrt(p) ; i++) {
+            if (p % i == 0) return false;
+        }
+
+        return true;
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
         int N = Integer.parseInt(br.readLine());
-        System.out.println(solution(N));
+        String s = br.readLine();
+        st = new StringTokenizer(s);
+        StringBuilder answer = new StringBuilder();
+        while (st.hasMoreTokens()) {
+            //역순처리
+            int solution = reverseOrder(Integer.parseInt(st.nextToken()));
+            //소수판별
+            if (isPrime(solution)) {
+                answer.append(solution);
+                answer.append(" ");
+            }
+        }
+        System.out.println(answer);
     }
 }
 

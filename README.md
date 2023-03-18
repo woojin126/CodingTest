@@ -1075,27 +1075,37 @@ class Main {
 
 8
 ``` 소수 개수구하기 (에라토스테네스의 체 사용)
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 
 class Main {
     public static int solution(int N) {
-        int[] arr = new int[N+1];
+        boolean[] arr = new boolean[N+1];
+        
+        // 0,1 번째 인덱스는 true로 초기화
+        arr[0] = true;
+        arr[1] = true;
 
+        //2. 2부터 시작해서 특정 수의 배수에 해당하는 수는 모두 지운다.
+        // (지울 때 자기자신은 지우지 않고, 이미 지워진 수는 건너 뛴다.)
         for (int i = 2 ; i <= N ; i++) {
-            arr[i] = i;
-        }
-        for (int i = 2 ; i <= N ; i++) {
-            if (arr[i] == 0) continue;
+            if (arr[i]) continue;
 
-            for (int j = i*2 ; j <= N ; j+=i) {
-                arr[j] = 0;
+            //이미 지워진 숫자가 아니라면, 그 배수부터 출발하여, 가능한 모든 숫자 지우기
+            for (int j = 2 * i ; j <= N ; j+=i) {
+                arr[j] = true;
             }
         }
+        
+        //남아있는수 모두 출력 (소수) false인 값
+        int answer = 0;
+        for (int i = 0 ; i < arr.length ; i++) {
+            if (!arr[i]) answer++;
+        }
 
-        return (int) Arrays.stream(arr).filter(k -> k != 0).count();
+        return answer;
     }
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -1103,5 +1113,93 @@ class Main {
         System.out.println(solution(N));
     }
 }
+```
 
+## 6. 뒤집은 소수
+   설명
+
+N개의 자연수가 입력되면 각 자연수를 뒤집은 후 그 뒤집은 수가 소수이면 그 소수를 출력하는 프로그램을 작성하세요.
+
+예를 들어 32를 뒤집으면 23이고, 23은 소수이다. 그러면 23을 출력한다. 단 910를 뒤집으면 19로 숫자화 해야 한다.
+
+첫 자리부터의 연속된 0은 무시한다.
+
+
+입력
+첫 줄에 자연수의 개수 N(3<=N<=100)이 주어지고, 그 다음 줄에 N개의 자연수가 주어진다.
+
+각 자연수의 크기는 100,000를 넘지 않는다.
+
+
+출력
+첫 줄에 뒤집은 소수를 출력합니다. 출력순서는 입력된 순서대로 출력합니다.
+
+
+예시 입력 1
+
+9
+32 55 62 20 250 370 200 30 100
+예시 출력 1
+
+23 2 73 2 3
+
+``` 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+class Main {
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
+
+class Main {
+
+//입력받은 문자를 역순으로 바꾸는 메서드
+    public static int reverseOrder(int N) {
+        int t = N;
+        int nm;
+        StringBuilder answer = new StringBuilder();
+        while (t != 0) {
+            nm = t % 10;
+            t = t/10;
+
+            answer.append(nm);
+        }
+
+        return Integer.parseInt(String.valueOf(answer));
+
+    }
+
+//소수판별 메서드
+    public static boolean isPrime(int p) {
+        if (p == 1) return false;
+        for (int i = 2; i<= (int)Math.sqrt(p) ; i++) {
+            if (p % i == 0) return false;
+        }
+
+        return true;
+    }
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st;
+        int N = Integer.parseInt(br.readLine());
+        String s = br.readLine();
+        st = new StringTokenizer(s);
+        StringBuilder answer = new StringBuilder();
+        while (st.hasMoreTokens()) {
+            //역순처리
+            int solution = reverseOrder(Integer.parseInt(st.nextToken()));
+            //소수판별
+            if (isPrime(solution)) {
+                answer.append(solution);
+                answer.append(" ");
+            }
+        }
+        System.out.println(answer);
+    }
+}
 ```
