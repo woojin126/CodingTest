@@ -5,17 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 class Main {
-    public static int solution(int[] N) {
-        int value = 0;
-        int sum = 0;
-        for (int i = 0; i < N.length ; i++) {
-            if (N[i] == 0) {
-                sum = 0;
-            } else {
-                value += ++sum;
+    public static int[] solution(int[] N) {
+        int[] answer = new int[N.length];
+        for (int i=0 ; i<N.length ; i++) {
+            int grade=N.length;
+            for (int j=0; j<N.length ; j++) {
+                if (i==j) continue;
+                if (N[i] >= N[j]) grade--;
             }
+
+            answer[i] = grade;
         }
-        return value;
+        return answer;
     }
 
     public static void main(String[] args) throws IOException {
@@ -25,8 +26,10 @@ class Main {
 
         int[] value = Arrays.stream(input).mapToInt(Integer::parseInt).toArray();
 
-        System.out.println(solution(value));
-
+        int[] solution = solution(value);
+        for (int i : solution) {
+            System.out.print(i + " ");
+        }
     }
 }
 
