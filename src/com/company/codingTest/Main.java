@@ -1,35 +1,44 @@
 package com.company.codingTest;
 
-import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.Scanner;
+
 class Main {
-    public static int[] solution(int[] N) {
-        int[] answer = new int[N.length];
-        for (int i=0 ; i<N.length ; i++) {
-            int grade=N.length;
-            for (int j=0; j<N.length ; j++) {
-                if (i==j) continue;
-                if (N[i] >= N[j]) grade--;
+    public static int solution(int[][] arr) {
+
+        int max = 0;
+        int sum, sum2;
+        for (int i = 0 ; i < arr[0].length ; i++) {
+            sum=sum2=0;
+            for (int j = 0 ; j < arr.length ; j++) {
+                sum += arr[i][j];
+                sum2 += arr[j][i];
             }
 
-            answer[i] = grade;
+            int bi = Math.max(sum, sum2);
+            if (bi > max) max = bi;
         }
+
+        sum=sum2=0;
+        for (int i = 0; i < arr[0].length ;i++) {
+            sum += arr[i][i];
+            sum2 += arr[i][i];
+        }
+        int answer = Math.max(max, Math.max(sum, sum2));
         return answer;
     }
 
     public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        String[] input = br.readLine().split(" ");
-
-        int[] value = Arrays.stream(input).mapToInt(Integer::parseInt).toArray();
-
-        int[] solution = solution(value);
-        for (int i : solution) {
-            System.out.print(i + " ");
+        Scanner sc = new Scanner(System.in);
+        int N = sc.nextInt();
+        int[][] arr = new int[N][N];
+        for (int i=0; i<N; i++) {
+            for (int j=0; j<N ;j++) {
+                arr[i][j] = sc.nextInt();
+            }
         }
+
+        System.out.println(solution(arr));
     }
 }
 
