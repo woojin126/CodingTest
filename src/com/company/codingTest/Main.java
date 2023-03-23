@@ -4,12 +4,26 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class Main {
+    static int[] dx = {-1, 0, 1, 0};
+    static int[] dy = {0, 1, 0, -1};
+
     public static int solution(int[][] arr) {
         int count = 0;
-        for (int i = 1; i < arr.length - 1; i++) {
-            for (int j = 1; j < arr.length - 1; j++) {
-                if (arr[i][j] > arr[i + 1][j] && arr[i][j] > arr[i][j + 1] && arr[i][j] > arr[i - 1][j] && arr[i][j] > arr[i][j - 1])
-                    count++;
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr.length; j++) {
+                boolean flag = true;
+
+                for (int k = 0; k < 4; k++) {
+                    int nx = dx[k] + i;
+                    int ny = dy[k] + j;
+
+                    if (nx >= 0 && nx < arr[0].length && ny >= 0 && ny < arr[0].length && arr[nx][ny] > arr[i][j]) {
+                        flag = false;
+                        break;
+                    }
+                }
+
+                if (flag) count++;
             }
         }
         return count;
@@ -18,9 +32,9 @@ class Main {
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        int[][] arr = new int[N + 2][N + 2];
-        for (int i = 1; i < N + 1; i++) {
-            for (int j = 1; j < N + 1; j++) {
+        int[][] arr = new int[N][N];
+        for (int i = 0; i < N; i++) {
+            for (int j = 0; j < N; j++) {
                 arr[i][j] = sc.nextInt();
             }
         }
