@@ -4,29 +4,25 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class Main {
-    static int[] dx = {-1, 0, 1, 0};
-    static int[] dy = {0, 1, 0, -1};
-
     public static int solution(int[][] arr) {
-        int count = 0;
+        int max = 0;
+        int studentNumber = 0;
         for (int i = 0; i < arr.length; i++) {
+            int count = 0;
             for (int j = 0; j < arr.length; j++) {
-                boolean flag = true;
-
-                for (int k = 0; k < 4; k++) {
-                    int nx = dx[k] + i;
-                    int ny = dy[k] + j;
-
-                    if (nx >= 0 && nx < arr[0].length && ny >= 0 && ny < arr[0].length && arr[nx][ny] > arr[i][j]) {
-                        flag = false;
+                for (int k = 0; k < 5; k++) {
+                    if (arr[i][k] == arr[j][k]) {
+                        count++;
                         break;
                     }
                 }
-
-                if (flag) count++;
+            }
+            if (count > max) {
+                max = count;
+                studentNumber = i + 1;
             }
         }
-        return count;
+        return studentNumber;
     }
 
     public static void main(String[] args) throws IOException {
