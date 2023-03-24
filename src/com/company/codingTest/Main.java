@@ -5,31 +5,32 @@ import java.util.Scanner;
 
 class Main {
     public static int solution(int[][] arr) {
-        int max = 0;
-        int studentNumber = 0;
-        for (int i = 0; i < arr.length; i++) {
-            int count = 0;
-            for (int j = 0; j < arr.length; j++) {
-                for (int k = 0; k < 5; k++) {
-                    if (arr[i][k] == arr[j][k]) {
-                        count++;
-                        break;
+        int answer = 0;
+        for (int i=1;i<=arr[0].length;i++) {
+            int cnt = 0;
+            for (int j=1;j<=arr[0].length;j++) {
+                for (int m=0;m<arr.length;m++) {
+                    int pi=0; int pj=0;
+                    for (int g=0;g<arr[0].length;g++) {
+                        if (arr[m][g] == i) pi = g;
+                        if (arr[m][g] == j) pj = g;
                     }
+
+                    if (pi < pj) cnt++;
                 }
-            }
-            if (count > max) {
-                max = count;
-                studentNumber = i + 1;
+                if (cnt == arr.length)
+                    answer++;
             }
         }
-        return studentNumber;
+        return answer;
     }
 
     public static void main(String[] args) throws IOException {
         Scanner sc = new Scanner(System.in);
         int N = sc.nextInt();
-        int[][] arr = new int[N][N];
-        for (int i = 0; i < N; i++) {
+        int M = sc.nextInt();
+        int[][] arr = new int[M][N];
+        for (int i = 0; i < M; i++) {
             for (int j = 0; j < N; j++) {
                 arr[i][j] = sc.nextInt();
             }
