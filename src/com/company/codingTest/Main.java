@@ -4,16 +4,18 @@ import java.io.IOException;
 import java.util.Scanner;
 
 class Main {
-    public static int solution(int[][] arr) {
+    public static int solution(int[][] arr, int N, int M) {
         int answer = 0;
-        for (int i=1;i<=arr[0].length;i++) {
-            int cnt = 0;
-            for (int j=1;j<=arr[0].length;j++) {
-                for (int m=0;m<arr.length;m++) {
+        for (int i=1;i<=N;i++) {
+            for (int j=1;j<=N;j++) {
+                if (i==j) continue;
+
+                int cnt = 0;
+                for (int m=0;m<M;m++) {
                     int pi=0; int pj=0;
-                    for (int g=0;g<arr[0].length;g++) {
+                    for (int g=0;g<N;g++) {
                         if (arr[m][g] == i) pi = g;
-                        if (arr[m][g] == j) pj = g;
+                        else if (arr[m][g] == j) pj = g;
                     }
 
                     if (pi < pj) cnt++;
@@ -36,7 +38,7 @@ class Main {
             }
         }
 
-        int solution = solution(arr);
+        int solution = solution(arr,N,M);
         System.out.println(solution);
 
     }
